@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sacombank</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #fff8f0;
+      overflow-x: hidden;
+    }
+
+    .temple {
+      margin: 40px auto;
+      position: relative;
+    }
+
+    .temple img {
+      max-width: 700px;
+    }
+
+    .success-text {
+      font-size: 30px;
+      font-weight: bold;
+      color: green;
+      margin-top: -20px;
+    }
+
+    .input-container {
+      margin-top: 20px;
+    }
+
+    input, textarea {
+      width: 300px;
+      padding: 10px;
+      margin: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #d2691e;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+
+    .huong {
+      position: absolute;
+      bottom: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 100px;
+      background-color: brown;
+      border-radius: 3px;
+      z-index: 10;
+      opacity: 0;
+    }
+
+    .huong-annimation {
+      animation: riseUp 2s ease-out forwards;
+    }
+
+    @keyframes riseUp {
+      0% {
+        bottom: -50px;
+        opacity: 1;
+      }
+      100% {
+        bottom: 380px;
+        opacity: 1;
+      }
+    }
+
+    .smoke {
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background-color: rgba(130, 128, 128, 0.6);
+      bottom: 470px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: smokeRise 3s ease-out forwards;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    @keyframes smokeRise {
+      0% {
+        opacity: 0.8;
+        transform: translateX(-50%) translateY(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-120px) scale(1.5);
+      }
+    }
+
+    #message {
+      display: none;
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 5px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      z-index: 9999;
+    }
+
+    .xanh-text {
+        color: #2196F3; 
+        font-size: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="temple" id="temple">
+    <div class="xanh-text">Ngân Hàng TMCP Sacombank</div>
+    <img src="/img/sgtt.png" alt="GOLIVE Sacombank" />
+    <h2 id="message"></h2>
+  </div>
+
+  <div class="input-container">
+    <input type="text" id="name" placeholder="Họ tên của bạn..." /><br />
+    <textarea id="wish" rows="4" placeholder="Ước nguyện của bạn..."></textarea><br />
+    <button onclick="playAudio()">THẮP HƯƠNG</button>
+  </div>
+
+  <audio id="music" src="/img/tungkinh.mp3"></audio>
+
+  <script>
+    let smokeInterval = null;
+
+    function playAudio() {
+      const name = document.getElementById("name").value;
+      const wish = document.getElementById("wish").value;
+      if (!name) {
+        alert("Vui lòng nhập đủ họ tên.");
+        return;
+      }
+
+      document.getElementById("music").play();
+      showWish(name, wish);
+
+      const temple = document.getElementById("temple");
+      
+
+      if (!document.querySelector(".huong")) {
+        const stick = document.createElement("div");
+        stick.classList.add("huong", "huong-annimation");
+        temple.appendChild(stick);
+
+        
+        setTimeout(() => {
+          startSmokeLoop();
+        }, 2000);
+      } else {
+        if (!smokeInterval) {
+          startSmokeLoop();
+        }
+      }
+    }
+
+    function startSmokeLoop() {
+      const temple = document.getElementById("temple");
+      smokeInterval = setInterval(() => {
+        const smoke = document.createElement("div");
+        smoke.classList.add("smoke");
+        temple.appendChild(smoke);
+
+    
+        setTimeout(() => {
+          smoke.remove();
+        }, 7500);
+      }, 600);
+    }
+    function showWish(name, wish) {
+    const message = document.getElementById("message");
+    // message.innerText = `Cầu chúc ${name} sớm đạt được ước nguyện: "${wish}"!`;
+    //message.style.display = "block";
+
+    setTimeout(() => {
+      message.style.display = "none";
+    }, 3000);
+    }
+   
+
+  </script>
+</body>
+</html>
