@@ -12,10 +12,11 @@
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      background-color: #fff8f0;
+      background-color: #f0f8ff;
       margin: 0;
       padding: 10px;
-      overflow-x: hidden;
+      /* overflow-x: hidden; */
+      overflow: hidden;
     }
 
     .temple {
@@ -25,7 +26,8 @@
 
     .xanh-text {
       color: #2196F3;
-      font-size: 7vw;
+      font-size: 3vw;
+      text-align: center;
       font-weight: bold;
     }
 
@@ -123,6 +125,32 @@
       cursor: pointer;
       width: 100%;
     }
+    .leaf {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-image: url('https://th.bing.com/th/id/OIP.HgsvYRT88rTwEX3b-4ypdAHaHa?cb=iwp2&rs=1&pid=ImgDetMain');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.8;
+    pointer-events: none;
+    animation: fall 8s linear forwards;
+  }
+
+  @keyframes fall {
+    0% {
+      transform: translateY(0) translateX(0) rotate(0deg);
+      opacity: 1;
+    }
+    50% {
+      transform: translateY(50vh) translateX(20px) rotate(180deg);
+      opacity: 0.8;
+    }
+    100% {
+      transform: translateY(100vh) translateX(-20px) rotate(360deg);
+      opacity: 0;
+    }
+}
   </style>
 </head>
 <body>
@@ -132,6 +160,7 @@
       <img src="/img/sgtt.png" alt="GOLIVE Sacombank" />
     </div>
     <h2 id="message"></h2>
+
   </div>
 
   <div class="input-container">
@@ -139,11 +168,33 @@
     <textarea id="wish" rows="4" placeholder="Ước nguyện của bạn..."></textarea><br />
     <button onclick="playAudio()">THẮP HƯƠNG</button>
   </div>
+  <footer style="text-align: center; padding: 20px; background-color: #f1f1f1; font-size: 14px;">
+  &copy; 2025 Ngân hàng TMCP Sài Gòn Thương Tín Sacombank. Made by Trần Nguyên Khôi Sieu Zip Pro
+</footer>
 
   <audio id="music" src="/img/tungkinh.mp3"></audio>
 
   <script>
     let smokeInterval = null;
+    const leafCount = 70;
+
+    function animationLaRoi() {
+      setInterval(() => {
+        const leaf = document.createElement("div");
+        leaf.classList.add("leaf");
+
+       
+        leaf.style.left = Math.random() * 100 + "vw";
+        leaf.style.animationDuration = 6 + Math.random() * 4 + "s";
+        leaf.style.top = "-30px";
+        document.body.appendChild(leaf);
+
+      
+        setTimeout(() => {
+          leaf.remove();
+        }, 10000);
+      }, 300);
+    }
 
     function playAudio() {
       const name = document.getElementById("name").value;
@@ -193,6 +244,9 @@
         message.style.display = "none";
       }, 3000);
     }
+    window.onload = () => {
+      animationLaRoi();
+    };
   </script>
 </body>
 </html>
