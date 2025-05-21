@@ -180,7 +180,7 @@
   </div>
 
   <div class="input-container">
-    <input type="text" id="name" placeholder="Họ tên của bạn..." /><br />
+    <input type="text" id="name" placeholder="Nhập mail sacombank nhé..." /><br />
     <textarea id="wish" rows="2" placeholder="Ước nguyện của bạn cho Phật đi nào...."></textarea><br />
 
     <div>
@@ -250,18 +250,20 @@
         document.getElementById("wishselect").selectedIndex
       ].text;
 
-      if (!name) {
-        alert("Vui lòng nhập đủ họ tên.");
+      if (!name || !name.endsWith("@sacombank.com")) {
+        alert("Vui lòng nhập đủ mail sacombank.");
         return;
       }
+      const fromName = name.replace("@sacombank.com", "");
 
       // Gửi email
       emailjs
         .send("service_hvczoqn", "template_05hxo0v", {
-          to_email: "kukhoi.2202@gmail.com",
-          from_name: name,
-          name: name,
-          wish: wishselect || "(Không có ước nguyện)",
+          to_email: name,
+          from_name: fromName,
+          name: fromName,
+          wishselect: selectedText,
+          wish: wish || "(Không có ước nguyện)",
           time: getFormattedTime(),
         })
         .then(() => {
