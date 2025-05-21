@@ -11,13 +11,13 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #f0f8ff;
-      margin: 0;
-      padding: 10px;
-      /* overflow-x: hidden; */
-      overflow: hidden;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #f0f8ff;
+        margin: 0;
+        padding: 10px;
+        overflow-x: hidden;
+        font-size: 1rem; 
     }
 
     .temple {
@@ -37,12 +37,21 @@
       width: 100%;
       margin: 0 auto;
     }
+    @media (max-width: 576px) {
+      .xanh-text {
+        font-size: 8vw;
+      }
+
+      .overlay-text {
+        font-size: 6vw;
+      }
+    }
 
     .temple-img-wrapper img {
-        max-width: 100%;
-        height: auto;
-        display: block;
-        margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
     }
 
 
@@ -109,7 +118,7 @@
 
     input, textarea {
       width: 100%;
-      padding: 12px;
+      padding: 1em;
       margin: 10px 0;
       border: 1px solid #ccc;
       border-radius: 5px;
@@ -117,14 +126,14 @@
     }
 
     button {
-      padding: 10px 20px;
+      padding: 0.8em;
       font-size: 1rem;
+      width: 100%;
       background-color: #d2691e;
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      width: 100%;
     }
     .leaf {
     position: absolute;
@@ -149,6 +158,13 @@
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); /* Tạo bóng để nổi bật */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font dễ đọc, hiện đại */
     white-space: pre-line;
+  }
+  footer {
+    text-align: center;
+    padding: 1em;
+    background-color: #f1f1f1;
+    font-size: 0.875rem;
+    word-wrap: break-word;
   }
 
 
