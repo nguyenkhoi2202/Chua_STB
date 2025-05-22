@@ -271,7 +271,7 @@
         document.getElementById("wishselect").selectedIndex
       ].text;
 
-      if (!name || !name.endsWith("@sacombank.com") || !name.endsWith("@gmail.com")) {
+      if (!name || (!name.endsWith("@sacombank.com") && !name.endsWith("@gmail.com"))) {
         alert("Vui lòng nhập đủ mail sacombank.");
         return;
       }
@@ -315,7 +315,6 @@
         audio.pause();
         audio.currentTime = 0;
       });
-      await sleep(500);
      
       const selectedValueComboBox = document.getElementById("wishselect").value;
 
